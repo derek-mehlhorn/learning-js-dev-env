@@ -7,9 +7,21 @@ export function getUsers() {
   return doGet('users');
 }
 
+export function deleteUser(id) {
+  return del(`users/${id}`);
+}
+
 function doGet(url) {
   // using node 'fetch' library.
   return fetch(baseUrl + url).then(onSuccess, onError);
+}
+
+function del(url)
+{
+  const request = new Request(baseUrl + url, {
+    method: 'DELETE'
+  });
+  return fetch(request).then(onSuccess, onError);
 }
 
 function onSuccess(response){
