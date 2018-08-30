@@ -6,14 +6,16 @@ export default {
   debug: true,
   devtool: 'source-map',
   noInfo: false,
-  entry: [
-    path.resolve(__dirname, 'src/index')
-  ],
+  // Webpack will automatically attempt to optimize chunks based on number of entry points.
+  entry: {
+    vendor: path.resolve(__dirname, 'src/vendor'),
+    main: path.resolve(__dirname, 'src/index')
+  },
   target: 'web',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: '[name].js' // [name] will be automatically replaced by entry keys defined above.
   },
   plugins: [
     //Create HTML file to include bundled js
